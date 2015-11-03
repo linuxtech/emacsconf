@@ -84,8 +84,9 @@
 	    (emacs-lisp- "(" ")" nil))))
 
 
+;; Hideshow
 (require 'hideshow)
 
 (global-set-key (kbd "<f9>") 'hs-toggle-hiding)
 (global-set-key (kbd "C-<f9>") 'hs-hide-all)
-   (global-set-key (kbd "C-S-<f9>") 'hs-show-all)
+(global-set-key (kbd "C-S-<f9>") 'hs-show-all)
