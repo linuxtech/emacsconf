@@ -13,7 +13,9 @@
              '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  )
 (package-initialize) ;; You might already have this line
 
 
@@ -45,9 +47,21 @@
 (add-to-list 'interpreter-mode-alist '("perl5" . cperl-mode))
 (add-to-list 'interpreter-mode-alist '("miniperl" . cperl-mode))
 
+(ac-config-default)
 (require 'yasnippet)
 (yas-global-mode 1)
+;(require 'perl-completion)
 
+(add-hook  'cperl-mode-hook
+           (lambda ()
+	     (when (require 'perl-completion )
+	       (local-set-key (kbd "C-<return>") 'plcmp-cmd-complete-all))))
+	      
+;             (when (require 'auto-complete nil t) ; no error whatever auto-complete.el is not installed.
+;               (auto-complete-mode t)
+;               (make-variable-buffer-local 'ac-sources)
+;               (setq ac-sources
+;                     '(ac-source-perl-completion)))))
 
 
 
@@ -95,7 +109,8 @@
 
 (global-unset-key (kbd "C-k"))
 (global-set-key (kbd "<f8>") 'kill-whole-line) ;del line
-
+(global-set-key (kbd "C-S-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-S-<left>") 'shrink-window-horizontally)
 (global-set-key [f11] 'toggle-fullscreen)
 (global-set-key (kbd "C-c") 'kill-ring-save) ;copy
 (global-set-key (kbd "C-v") 'yank) ;paste
